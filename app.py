@@ -280,7 +280,7 @@ elif st.session_state.game_state == "playing":
                 rotation_angle = 0
                 caption_text = "Image is in original orientation (Easy Mode)"
             
-            st.image(img, caption=caption_text, width=600) 
+            st.image(img, caption=caption_text) 
         except FileNotFoundError:
             st.error(f"Error: Image file not found at {img_path}")
             st.stop()
