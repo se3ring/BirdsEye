@@ -23,7 +23,7 @@ IMAGE_FOLDER = "images"
 st.set_page_config(page_title="City Guess Game", layout="wide") 
 
 st.title("🏙️ Bird's Eye View")
-st.markdown("---")
+#st.markdown("---")
 
 # --- Initial Setup ---
 
@@ -289,8 +289,21 @@ elif st.session_state.game_state == "playing":
     # COLUMN 2: SCORECARD, RESULTS, AND GUESS FORM
     # --------------------------------
     with col2:
+        # Form for Guessing
+        with st.form(key="city_guess_form"):
+            st.text_input(
+                "Your guess:", 
+                key="guess_input_key", 
+                placeholder="e.g., New York City, Houston, Denver...",
+            )
+            
+            st.form_submit_button(
+                "Submit Guess and See Next City", 
+                on_click=handle_submit, 
+            )
         st.subheader("Score and Play Area")
         stat_col1, stat_col2 = st.columns([2,1])
+
 
         with stat_col1:
             current_game_number = st.session_state.total_games + 1
@@ -309,20 +322,8 @@ elif st.session_state.game_state == "playing":
                 delta=f"{total_wins} Wins" if total_games > 0 else None
             )
         
-        st.markdown("---") 
+        #st.markdown("---") 
 
-        # Form for Guessing
-        with st.form(key="city_guess_form"):
-            st.text_input(
-                "Your guess:", 
-                key="guess_input_key", 
-                placeholder="e.g., New York City, Houston, Denver...",
-            )
-            
-            st.form_submit_button(
-                "Submit Guess and See Next City", 
-                on_click=handle_submit, 
-            )
         
         # Display Results from Last Round
         if st.session_state.prev_guess:
